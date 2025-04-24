@@ -11,6 +11,11 @@ Auteur: Fatima El Hilali
     box-sizing: border-box;
 }
 
+body {
+    padding-top: 4rem; /* zelfde hoogte als je .navbar */
+  }
+  
+
 /*  Header & Navbar  */
 
 /* Mobile */
@@ -19,11 +24,14 @@ Auteur: Fatima El Hilali
     align-items: center;
     justify-content: space-between;
     width: 100%;
+
 }
 
 /* Desktop */
 @media (min-width: 1024px) {
     .navbar {
+        min-height: 4rem; /* Of exact de hoogte van de navbar */
+        height: 4rem; /* bijvoorbeeld */
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -60,7 +68,6 @@ Auteur: Fatima El Hilali
     .logo img {
         height: 3rem;
         margin-left: 1rem;
-        right: 20%;
     }
 }
 
@@ -257,3 +264,6 @@ Auteur: Fatima El Hilali
 .hamburger:focus {
   outline: 3px solid #ffcc00; 
 }
+
+
+

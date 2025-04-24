@@ -1,0 +1,57 @@
+
+<!-- Zoeksectie -->
+<section class="search-section">
+  <!-- Verborgen H1  voor SEO en toegankelijkheid -->
+  <h1 class="visually-hidden">Doorzoek de kunstcollectie</h1>
+  
+  <form class="search-form" method="get">
+    <!-- Verborgen label voor toegankelijkheid -->
+    <label for="search" class="visually-hidden">Zoek in de collecties</label>
+    <div class="input-container">
+      
+    <!-- Zoekveld -->
+      <input type="text" id="search" name="search" class="input" placeholder="Search the collections...">
+    
+      <!-- Zoekknop met icoon en toegankelijkheidslabel -->
+      <button type="submit" class="icon">
+        <svg width="22px" height="22px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+          <title>Zoek icoon</title>
+          <path opacity="1" d="M14 5H20" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path opacity="1" d="M14 8H17" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M21 11.5C21 16.75 16.75 21 11.5 21C6.25 21 2 16.75 2 11.5C2 6.25 6.25 2 11.5 2" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path opacity="1" d="M22 22L20 20" stroke="#000" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+    </div>
+  </form>
+
+
+  <!-- Navigatie voor filters -->
+  <nav class="filter-nav">
+    <ul>
+      <li><a href="#">All Objects</a></li>
+      <li><a href="#">Paintings</a></li>
+      <li><a href="#">Sports</a></li>
+      <li><a href="#">Islamic Art</a></li>
+      <li><a href="#">Contemporary Art</a></li>
+    </ul>
+  </nav>
+</section>
+
+
+<!-- Kunstgalerij -->
+<section class="art-gallery">
+  <ul>
+    {% for artwork in artworks %}
+      <li class="art-item">
+        <figure class="art-figure">
+          <!-- Afbeelding van het kunstwerk -->
+          <a href="/detail/{{ artwork.id }}">
+          <img src="https://fdnd-agency.directus.app/assets/{{ artwork.image }}"  alt="{{ artwork.title }}" class="art-image">
+        </a>
+                   
+        </figure>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
