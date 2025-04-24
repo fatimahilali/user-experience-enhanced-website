@@ -20,6 +20,24 @@ app.engine('liquid', engine.express())
 // Stel de map in waar de Liquid templates zich bevinden
 app.set('views', './views')
 
+
+
+
+// Route-handler voor de hoofdpagina ('/')
+app.get('/', async function (request, response) {
+    // Haal de data op van de Directus API
+    const apiResponse = await fetch('https://fdnd-agency.directus.app/items/fabrique_art_objects');
+    const apiResponseJSON = await apiResponse.json();
+  
+    // Render de Liquid-template en geef de data mee
+    response.render('index.liquid', { artworks: apiResponseJSON.data });
+  });
+  
+
+
+
+
+
 // Stel het poortnummer in waarop de server moet draaien (voorkeur via omgeving, anders 8000)
 app.set('port', process.env.PORT || 8000)
 
