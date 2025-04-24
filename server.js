@@ -4,7 +4,7 @@ import express from 'express'
 // Importeer de Liquid templating engine (ook via npm geïnstalleerd)
 import { Liquid } from 'liquidjs'
 
-// Initialiseer een nieuwe Express-applicatie
+// Initialiseer een nieuwe Express-applicatie.....
 const app = express()
 
 // Maakt het mogelijk om data uit formulieren (POST-requests) uit te lezen
