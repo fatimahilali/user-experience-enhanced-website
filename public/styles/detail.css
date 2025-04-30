@@ -1,0 +1,563 @@
+/* 
+   Container voor de hele pagina - mobiel eerst
+*/
+.container {
+  width: 100%;
+  display: block; /* Gebruik block voor oudere browsers die geen flexbox ondersteunen */
+  max-width: 69.75rem;
+  padding: 3%;
+  margin: 3% auto;
+  margin-top: 20vh;
+  background: #fcfaf5;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+  border: 1px solid #d9cbb6;
+  border-left: 0.1875rem solid #7a654f;
+}
+
+/* Flexbox voor browsers die het wel ondersteunen */
+@supports (display: flex) {
+  .container {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start;
+    gap: 3%;
+
+  }
+}
+
+/* Desktop versie van .container */
+@media (min-width: 1024px) {
+  .container {
+      width: 90%;
+      padding: 2.5%;
+      flex-direction: row;
+      margin-top: 17%;
+  }
+}
+/* 
+   Object detail container (afbeelding)
+*/
+.object-detail {
+  flex: 1;
+  display: block; /* Gebruik block-weergave voor oudere browsers die geen flexbox ondersteunen */
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 31.25rem; 
+  height: 37.5rem;
+  border-radius: 0.375rem;
+  margin: 0 auto;
+  background-color: #f5f4f0;
+  margin-top: 4%;
+}
+
+/* Flexbox voor browsers die het wel ondersteunen */
+@supports (display: flex) {
+  .object-detail {
+      display: flex;
+      align-items: center; 
+      justify-content: center; 
+  }
+}
+
+
+ /* 
+   Afbeelding styling
+*/
+.detail-artwork-image {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.2);
+}
+
+
+
+  /* Hover effect */
+  .detail-artwork-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Mobiele aanpassing voor afbeelding */
+  @media (max-width: 1024px) {
+    .detail-artwork-image {
+      height: 15.625rem; 
+    }
+  }
+  
+  /* 
+     Info container naast afbeelding
+  */
+  .info-container {
+    flex: 1;
+    padding-left: 4%;
+    border-left: 1px solid var(--accent-color);
+  }
+  
+  
+  
+  /* 
+     Header boven info
+  */
+  .museum-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.625rem;
+    padding-bottom: 0.25rem;
+    width: 100%;
+    position: relative;
+  }
+  
+  .museum-header::before,
+  .museum-header::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: var(--accent-color);
+    position: absolute;
+    left: 0;
+  }
+  
+  .museum-header::before {
+    top: -0.1rem;
+  }
+  
+  
+  .museum-header::after {
+    bottom: -0.375rem;
+  
+  }
+  
+  .museum-header img {
+    width: 2.5rem;
+    height: auto;
+  }
+  
+  .museum-header p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: normal;
+    color: #4a3d32;
+  }
+  
+  
+  /* 
+     Titel - mobiel eerst
+  */
+  .info-left h1 {
+    font-family: var(--font-family-serif);
+    font-size: 1.5rem; 
+    font-weight: 300;
+    margin-top: 1%;
+    border-top: 1px solid var(--accent-color);   
+    padding-top: 0.75rem;            
+    color: #414141;
+    text-transform: none;
+    letter-spacing: 0.03125rem;
+    text-shadow: 0.1875rem 0.1875rem 0.375rem rgba(0, 0, 0, 0.25);
+  }
+  
+  /* Desktop aanpassing voor  titel */
+  @media (min-width: 1024px) {
+    .info-left h1 {
+      font-size: 2.5rem; 
+      border-top: none;
+  
+    }
+  }
+
+
+  /* Als het Arabisch is */
+ .info-left h1[dir="rtl"] {
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  text-align: right;
+  line-height: 1.4;
+}
+
+  
+  /* 
+     Jaartal markering - mobiel eerst
+  */
+  .highlight-year {
+    color: #78AAFA ;
+    font-weight: bold;
+    margin-top: 1rem;
+  }
+  
+  
+  
+  /* 
+     Paragraaftekst in de linkerzijde - mobiel eerst 
+  */
+  .info-left p {
+    font-size: 0.9375rem; 
+    line-height: 1.8; 
+    color: #333333; 
+    padding: 0.5rem 0;
+    width: 100%;
+    font-family: "Georgia", "Times New Roman", serif; 
+    text-shadow: 0.5px 0.5px 2px rgba(0, 0, 0, 0.2); 
+  }
+  
+  /* Desktop aanpassing */
+  @media (min-width: 1024px) {
+    .info-left p {
+      font-size: 1rem; 
+      line-height: 2; 
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25); 
+    }
+  }
+  /* 
+      paragraaf aan rechterzijde - mobiel eerst
+  */
+  .info-right p {
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: #5a5148;
+    padding: 0.375rem 0;
+    font-weight: normal;
+    text-align: left;
+  }
+  
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .info-right p {
+      font-size: 0.9rem;
+    }
+  }
+
+  
+/* 
+   Titel en slug onder de afbeelding - mobiel eerst
+*/
+.artwork-details {
+  display: block; /* fallback */
+  border-top: 1px solid var(--accent-color);
+  padding: 0.75rem;
+  font-size: 0.9375rem; 
+  color: #4a3d32;
+  font-weight: bold;
+  background: #f8f5f0;
+  border-radius: 0.5rem;
+  margin-top: 0.625rem;
+  text-align: center;
+  width: 100%;
+  border-bottom: 1px solid var(--accent-color);
+}
+
+@supports (display: flex) {
+  .artwork-details {
+    display: flex;
+    flex-direction: column; /* Op mobiel: onder elkaar */
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+
+/* Desktop: Zet Titel links en Slug rechts */
+@media (min-width: 1024px) {
+  .artwork-details {
+    flex-direction: row; /* Desktop: naast elkaar */
+    justify-content: space-between; /* Houdt Titel links en Slug rechts */
+    align-items: center;
+    font-size: 1rem;
+    text-align: left;
+    padding: 1rem 1.5rem; /* Extra witruimte */
+    max-width: 600px; 
+    margin: 1rem auto;
+    white-space: nowrap; /* Zorgt ervoor dat de tekst niet afbreekt */
+  }
+}
+  
+  /* Paragraafstijl mobile  */
+  .artwork-details p {
+    font-size: 0.875rem; 
+    line-height: 1.6;
+    color: #5a5148;
+    padding: 0.375rem 0;
+    font-weight: normal;
+    text-align: left;
+    width: 100%; 
+  }
+  
+  /* Desktop: Zorg ervoor dat Titel links blijft en Slug naar rechts gaat */
+  @media (min-width: 1024px) {
+    .artwork-details p {
+      flex: 1;
+      margin: 0;
+      white-space: nowrap; /* Zorgt dat de tekst niet op een nieuwe regel komt */
+      overflow: hidden;
+      text-overflow: ellipsis; /* Voegt "..." toe als de tekst te lang is */
+      
+    }
+  
+    /* Slug helemaal naar rechts */
+    .artwork-details p:last-child {
+      text-align: right; 
+    }
+  }
+
+  
+  /* 
+     Terug-knop - mobiel eerst
+  */
+  
+  .back-button {
+    position: absolute;
+    display: block; /* fallback */
+    top: 17%;            
+    left: -2%;          
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+  
+
+  @supports (display: flex) {
+    .back-button {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  
+  /* 
+     Desktop aanpassing:
+  */
+    @media (min-width: 1024px) {
+    .back-button {
+      top: 26%;           
+      left: 11%;          
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+    }
+  }
+  
+    /* Hover-effect – geldt voor alle schermen */
+    .back-button:hover {
+        background: rgba(0, 0, 0, 1);
+      }
+      
+  /* 
+     Dropcap stijl voor eerste letter - mobiel eerst
+  */
+  .dropcap::first-letter {
+    font-family: var(--font-family-display);
+    font-size: 3rem;           
+    font-weight: 700;
+    float: left;
+    margin-right: 0.5rem;     
+    line-height: 1;
+    color: #3e3e3e;
+  }
+  
+
+
+  /* Desktop aanpassing  dropcap */
+  @media (min-width: 1024px) {
+    .dropcap::first-letter {
+      font-size: 5rem;         
+      margin-right: 0.75rem;
+    }
+  }
+  
+
+ /* Alleen bij RTL-taal (dus bij Arabisch): float rechts */
+.dropcap:dir(rtl)::first-letter {
+  float: right;
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
+
+
+
+
+  /* 
+     Taalwisselaar container - mobiel eerst (kleiner gemaakt)
+  */
+  .language-switch {
+    position: absolute;
+    top: 17%; 
+    right: 1%;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: rgba(255, 255, 255, 0.06);
+    padding: 0.0625rem;
+    z-index: 100;
+  }
+  
+  /* 
+     Kleinere select dropdown voor mobiel
+  */
+  .language-switch select {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgb(49, 49, 49);
+    padding: 0.2rem;
+    width: 6rem;              
+    height: 1.75rem;          
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.6875rem;     /* ≈11px */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.06);
+    outline: none;
+    cursor: pointer;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  
+  /* Hover effect  */
+  .language-switch select:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
+  
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .language-switch {
+      top: 26%;
+      right: 12%;
+    }
+  
+    .language-switch select {
+      width: 8.75rem;        
+      height: 2.375rem;
+      font-size: 0.8125rem;  
+    }
+  }
+  
+
+  /* Verbergt elementen visueel en uit layout */
+.hidden {
+  display: none;
+}
+
+/* Alleen visueel verbergen, maar nog beschikbaar voor screenreaders */
+.visually-hidden {
+  position: absolute;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+
+/* foutmelding-stijl  */
+.cute-error {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  margin: 2rem 1rem;
+  background: #fff5f7;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  font-family: Arial, sans-serif;
+  gap: 2rem;
+}
+
+/* === Desktop Styles === */
+@media (min-width: 1024px) {
+  .cute-error {
+    margin: 4rem auto;
+    margin-left: 8%;
+    margin-top: 18%;
+  }
+}
+
+
+/*  foutmelding text stijl   */
+.cute-error .error-text,
+.cute-error .error-image {
+  flex: 1 1 100%;
+}
+
+/* === Desktop Styles === */
+@media (min-width: 1024px) {
+  .cute-error .error-text,
+  .cute-error .error-image {
+    flex: 1 1 300px;
+  }
+}
+
+/*  foutmelding h1 text */
+.cute-error h1 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+/* === Desktop Styles === */
+@media (min-width: 1024px) {
+  .cute-error h1 {
+    font-size: 2rem;
+  }
+}
+
+/* foutmelding paragraaf  */
+.cute-error p {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+/* de go back button */
+.cute-error .back-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #EC3C8A;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 34rem;
+  margin-left: 3rem;
+}
+
+/* === Desktop Styles === */
+@media (min-width: 1024px) {
+  .cute-error .back-button {
+    margin-top: 30rem;
+    margin-left: 0.5rem;
+  }
+}
+
+/* hover color   */
+.cute-error .back-button:hover {
+  background: #78AAFA;
+}
+
+/*  Mona lisa image   */
+.cute-error img {
+  max-width: 70%;
+  border-radius: 1rem;
+  margin-top: 1rem;
+}
+
+
+/* === Desktop Styles === */
+@media (min-width: 1024px) {
+  .cute-error img {
+    max-width: 60%;
+    margin-top: 5%;
+  }
+}
+
+
+
+
