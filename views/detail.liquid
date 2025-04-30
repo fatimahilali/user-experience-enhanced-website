@@ -87,7 +87,7 @@ ChatGPT: Voor het bevestigen van mijn begrip van de bronnen.-->
           </p>
         </section>
 
-        <!-- beschrijving zoals titel en slug ==-->
+        <!-- beschrijving zoals titel en slug -->
         <aside class="info-right">
           <section class="artwork-details">
             <h2 id="artwork-metadata" class="visually-hidden">Details over het werk</h2>
@@ -117,3 +117,20 @@ ChatGPT: Voor het bevestigen van mijn begrip van de bronnen.-->
     </section>
   </main>
 {% endif %}
+
+<script>
+  // Wissel tussen Engels en Arabisch op de detailpagina
+  const languageSelect = document.getElementById("language-select");
+
+  if (languageSelect) {
+    languageSelect.addEventListener("change", (e) => {
+      const isArabic = e.target.value === "ar";
+
+// Toon of verberg elementen op basis van taal
+      document.getElementById("artwork-description-en").classList.toggle("hidden", isArabic);
+      document.getElementById("artwork-description-ar").classList.toggle("hidden", ! isArabic);
+      document.getElementById("artwork-title-en").classList.toggle("hidden", isArabic);
+      document.getElementById("artwork-title-ar").classList.toggle("hidden", ! isArabic);
+    });
+  }
+</script>
