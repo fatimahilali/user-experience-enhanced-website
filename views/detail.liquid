@@ -1,3 +1,4 @@
+
 <!-- bronnen:
 https://stackoverflow.com/questions/59196117/toggle-language-between-divs
 https://shopify.github.io/liquid/filters/escape/
@@ -5,6 +6,7 @@ https://shopify.github.io/liquid/filters/default/?utm_source=chatgpt.com
 https://stackoverflow.com/questions/41746962/change-language-url-with-select-option
 https://liquidjs.com/filters/newline_to_br.html
 https://stackoverflow.com/questions/24875414/addeventlistener-change-and-option-selection
+https://codyhouse.co/blog/post/accessible-language-picker?utm_source=
 ChatGPT: Voor het bevestigen van mijn begrip van de bronnen.-->
 
 <!-- Inladen van de header (navbar) via Liquid partials -->
@@ -13,29 +15,23 @@ ChatGPT: Voor het bevestigen van mijn begrip van de bronnen.-->
 <!-- Inladen van de basis CSS en metadata -->
 {% render 'partials/head.liquid' %}
 
-
-<!-- Error state: geen artwork -->
   {% if artwork %}
-
   <!-- Detailpagina voor een specifiek artwork -->
     <main class="detail-artwork"> <div class="container">
-
       <!-- Navigatie bovenaan met terugknop en taalkeuze -->
       <nav>
-        <!-- Terug naar homepage -->
-        <a
-          href="/"
-          class="back-button"
-          title="Terug naar de homepagina">← BACK</a>
+        <a href="/" class="back-button"title="Terug naar de homepagina">← BACK</a>
 
-        <!-- Taalkeuze dropdown -->
-        <div class="language-switch">
+        <!-- Taalkeuze dropdown (stuurt backend aan via GET request) -->
+        <form method="get" class="language-switch">
           <label for="language-select" class="visually-hidden">Taalkeuze</label>
-          <select id="language-select">
-            <option value="en">🇬🇧 English</option>
-            <option value="ar">🇸🇦 العربية</option>
+          <select id="language-select" name="lang">
+            <option value="en" {% if artwork.language == 'en' %}selected{% endif %}>🇬🇧 English</option>
+            <option value="ar" {% if artwork.language == 'ar' %}selected{% endif %}>🇸🇦 العربية</option>
           </select>
-        </div>
+          <button type="submit">OK</button>
+        </form>
+        
       </nav>
 
       <!-- Afbeelding van het artwork -->
@@ -50,19 +46,9 @@ ChatGPT: Voor het bevestigen van mijn begrip van de bronnen.-->
       <div class="info-container">
         <section class="info-left">
           <header>
-            <!-- Titel Engels (zichtbaar standaard) -->
-            <h1 id="artwork-title-en" class="artwork-title">
-              Portraits Sketched <br> from the Life Since<br>
-              the Year
-              <span class="highlight-year">1793</span>
-            </h1>
-
-            <!-- Titel Arabisch (alleen zichtbaar bij selectie) -->
-            <h1
-              id="artwork-title-ar"
-              class="artwork-title hidden"
-              dir="rtl">
-              {{ artwork.titleAR | escape }}
+            <!-- Titel in juiste taal -->
+            <h1 class="artwork-title" {% if artwork.language == 'ar' %}dir="rtl"{% endif %}>
+              {{ artwork.title | escape }}
             </h1>
 
             <!-- Museuminformatie -->
@@ -72,20 +58,15 @@ ChatGPT: Voor het bevestigen van mijn begrip van de bronnen.-->
             </div>
           </header>
 
-          <!-- Engelse beschrijving, met fallback indien leeg in backend -->
-          <p class="dropcap description en" id="artwork-description-en">
+          <!-- Beschrijving in juiste taal -->
+        <p class="dropcap description {% if artwork.language == 'ar' %}ar{% else %}en{% endif %}" {% if artwork.language == 'ar' %}dir="rtl"{% endif %}>
+          {% if artwork.language == 'ar' %}
+            {{ artwork.summary | default: "لا يوجد وصف باللغة العربية." | escape | newline_to_br }}
+          {% else %}
             {{ artwork.summary | default: "Bowl with monochrome luster decoration. The design shows an antelope confronting a long-tailed bird on a background of small chevrons. The kufic inscription on the body of the antelope says: “blessing to its owner.“ Above the antelope, the artist inscribed his name: “work of ‘Ali.“ In the middle of the glazed foot, the word Baraka (blessing) is rendered in kufic script. The initially abstract design style of the Abbasid luster wares developed in the 10th century and particularly in Iraq into a new decorative approach with animal designs. These are usually set on a stippled background. By this time, potters had abandoned polychrome painting in favor of monochrome luster. Here, a single animal or a symmetrical pair was at the center of the design. The change of style may reflect the taste of the new elite formed when the Buyids arrived in Iraq." | escape | newline_to_br }}
-          </p>
-
-          <!-- Arabische beschrijving, met fallback als tekst ontbreekt -->
-
-          <p
-            class="dropcap description ar hidden"
-            id="artwork-description-ar"
-            dir="rtl">
-            {{ artwork.summaryAR | default: "لا يوجد وصف باللغة العربية." | escape | newline_to_br }}
-          </p>
-        </section>
+          {% endif %}
+        </p>
+        
 
         <!-- beschrijving zoals titel en slug -->
         <aside class="info-right">
@@ -99,38 +80,21 @@ ChatGPT: Voor het bevestigen van mijn begrip van de bronnen.-->
         </aside>
       </div>
     </div>
-  {% else %}
+  </main>
+{% else %}
 
-    <!-- error state : toon melding als artwork niet gevonden is -->
+
+  <!-- Error state : artwork niet gevonden -->
+  <main class="detail-artwork">
     <section class="error-state cute-error">
       <div class="error-text">
         <h1>OOPS...<br>GALLERY NOT FOUND.</h1>
         <p>Even Mona Lisa couldn’t find this one.<br>Let’s get you back on track.</p>
         <a href="/" class="back-button">← Go back</a>
       </div>
-
-      <!-- img die gebruikt is voor de error state pagina-->
-
       <div class="error-image">
         <img src="/assets/error.png" alt="Mona Lisa chewing gum – page not found">
       </div>
     </section>
   </main>
 {% endif %}
-
-<script>
-  // Wissel tussen Engels en Arabisch op de detailpagina
-  const languageSelect = document.getElementById("language-select");
-
-  if (languageSelect) {
-    languageSelect.addEventListener("change", (e) => {
-      const isArabic = e.target.value === "ar";
-
-// Toon of verberg elementen op basis van taal
-      document.getElementById("artwork-description-en").classList.toggle("hidden", isArabic);
-      document.getElementById("artwork-description-ar").classList.toggle("hidden", ! isArabic);
-      document.getElementById("artwork-title-en").classList.toggle("hidden", isArabic);
-      document.getElementById("artwork-title-ar").classList.toggle("hidden", ! isArabic);
-    });
-  }
-</script>
