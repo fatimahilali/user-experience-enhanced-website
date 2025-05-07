@@ -218,11 +218,12 @@ body {
         width: 1rem;
         height: 1rem;
     }
-
     .member-link img {
         width: 1rem;
-        height: auto;
+        height: 1rem;
+        
     }
+    
 }
 
 /* Toegankelijkheid */

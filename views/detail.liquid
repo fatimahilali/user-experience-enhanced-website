@@ -23,7 +23,7 @@ ChatGPT: Voor het bevestigen van mijn begrip van de bronnen
     <main class="detail-artwork"> <div class="container">
       <!-- Navigatie bovenaan met terugknop en taalkeuze -->
       <nav>
-        <a href="/" class="back-button"title="Terug naar de homepagina">← BACK</a>
+        <a href="/" class="back-button" title="Terug naar de homepagina">← BACK</a>
 
         <!-- Taalkeuze dropdown (stuurt backend aan via GET request) -->
         <form method="get" class="language-switch">
@@ -54,13 +54,7 @@ ChatGPT: Voor het bevestigen van mijn begrip van de bronnen
               {{ artwork.title | escape }}
             </h1>
 
-            <!-- Museuminformatie -->
-            <div class="museum-header">
-              <img src="/assets/museum-icon.png" alt="Logo van Museum of Islamic Art">
-              <p>Museum of Islamic Art</p>
-            </div>
-          </header>
-
+        
           <!-- Beschrijving in juiste taal -->
         <p class="dropcap description {% if artwork.language == 'ar' %}ar{% else %}en{% endif %}" {% if artwork.language == 'ar' %}dir="rtl"{% endif %}>
           {% if artwork.language == 'ar' %}
@@ -86,19 +80,32 @@ ChatGPT: Voor het bevestigen van mijn begrip van de bronnen
   </main>
 {% else %}
 
-  <!-- Error state : artwork niet gevonden ---->
-  <main class="detail-artwork">
-    <section class="error-state cute-error">
-      <div class="error-text">
-        <h1>OOPS...<br>GALLERY NOT FOUND.</h1>
-        <p>Even Mona Lisa couldn’t find this one.<br>Let’s get you back on track.</p>
-        <a href="/" class="back-button">← Go back</a>
-      </div>
-      <div class="error-image">
-        <img src="/assets/error.png" alt="Mona Lisa chewing gum – page not found">
-      </div>
-    </section>
-  </main>
+
+ <!-- Error state : artwork niet gevonden -->
+<main class="detail-artwork">
+  <section class="error-state cute-error">
+    <div class="error-text">
+      <h1>OOPS...<br>GALLERY NOT FOUND.</h1>
+      <p>Even Mona Lisa couldn’t find this one.<br>Let’s get you back on track.</p>
+      <a href="/" class="back-button">← Go back</a>
+    </div>
+    <div class="error-image">
+      <picture>
+        <!-- AVIF -->
+        <source srcset="/assets/error.avif" type="image/avif">
+        <!-- WebP -->
+        <source srcset="/assets/error.webp" type="image/webp">
+        <!-- PNG fallback -->
+        <img
+          src="/assets/error.png"
+          alt="Mona Lisa chewing gum – page not found"
+          width="600"
+          height="400"
+          loading="lazy">
+      </picture>
+    </div>
+  </section>
+</main>
 {% endif %}
 
 

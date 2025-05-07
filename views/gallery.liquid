@@ -1,4 +1,3 @@
-
 <!-- Zoeksectie -->
 <section class="search-section">
   <!-- Verborgen H1  voor SEO en toegankelijkheid -->
@@ -25,6 +24,7 @@
     </div>
   </form>
 
+  
   <!-- Navigatie voor filters -->
   <nav class="filter-nav">
     <ul>
@@ -44,13 +44,54 @@
     {% for artwork in artworks %}
       <li class="art-item">
         <figure class="art-figure">
-          <!-- Afbeelding van het kunstwerk -->
-          <a href="/detail/{{ artwork.id }}">
-          <img src="https://fdnd-agency.directus.app/assets/{{ artwork.image }}"  alt="{{ artwork.title }}" class="art-image">
-        </a>
-                   
+          <a href="/detail/{{ artwork.id }}" >
+          <picture>
+            <!-- AVIF (meerdere resoluties) -->
+            <source
+              type="image/avif"
+              srcset="
+                https://fdnd-agency.directus.app/assets/{{ artwork.image }}?format=avif&width=250 250w,
+                https://fdnd-agency.directus.app/assets/{{ artwork.image }}?format=avif&width=350 350w,
+                https://fdnd-agency.directus.app/assets/{{ artwork.image }}?format=avif&width=450 450w,
+                https://fdnd-agency.directus.app/assets/{{ artwork.image }}?format=avif&width=720 720w
+              "
+              sizes="
+                  (max-width: 400px) 100vw,
+                  (max-width: 768px) 50vw,
+                  (max-width: 1024px) 33vw,
+                  300px
+                "
+            >
+
+            <!-- WebP fallback -->
+            <source
+              type="image/webp"
+              srcset="
+                https://fdnd-agency.directus.app/assets/{{ artwork.image }}?format=webp&width=250 250w,
+                https://fdnd-agency.directus.app/assets/{{ artwork.image }}?format=webp&width=350 350w,
+                https://fdnd-agency.directus.app/assets/{{ artwork.image }}?format=webp&width=450 450w,
+                https://fdnd-agency.directus.app/assets/{{ artwork.image }}?format=webp&width=720 720w
+              "
+              sizes="
+              (max-width: 400px) 100vw,
+              (max-width: 768px) 50vw,
+              (max-width: 1024px) 33vw,
+              300px
+            "            >
+
+            <!-- Standaard fallback (bijv. PNG of origineel) -->
+            <img
+            src="https://fdnd-agency.directus.app/assets/{{ artwork.image.id }}?format=png&width=720"
+            alt="Afbeelding van {{ artwork.title }}"
+              width="{{ artwork.image.width }}"
+              height="{{ artwork.image.height }}"
+              loading="lazy"
+            >
+          </picture>
         </figure>
       </li>
     {% endfor %}
   </ul>
 </section>
+
+
