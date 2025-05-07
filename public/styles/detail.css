@@ -588,49 +588,30 @@
 }
 
 
+  /*bron /;https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API/Using*/
 
-
-/* Container om skeleton + image op elkaar te leggen */
-.image-skeleton-wrapper {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  max-width: 600px;
-  aspect-ratio: 4 / 3;
-  background-color: #f3f3f3;
-  overflow: hidden;
+@view-transition {
+  navigation: auto;
 }
 
-/* Skeleton stijl */
-.image-skeleton {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, #eee, #ddd, #eee);
-  background-size: 200% 100%;
-  animation: shimmer 1.2s infinite;
-  z-index: 1;
-}
-
-/* Fade-in effect voor afbeelding */
-.image-skeleton-wrapper img {
-  display: block;
-  width: 100%;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  position: relative;
-  z-index: 2;
-}
-
-/* Zodra geladen: fade-in */
-.image-skeleton-wrapper img.loaded {
-  opacity: 1;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
+@keyframes move-out {
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
   }
-  100% {
-    background-position: 200% 0;
+}
+
+@keyframes move-in {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
   }
+}
+
+::view-transition-old(root) {
+  animation: move-out 0.5s ease-in forwards;
+}
+
+::view-transition-new(root) {
+  animation: move-in 0.5s ease-out forwards;
 }

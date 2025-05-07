@@ -403,3 +403,29 @@ Auteur: Fatima El Hilali
 
   
   
+  @view-transition {
+    navigation: auto;
+  }
+  
+  @keyframes move-out {
+    to {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes move-in {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  }
+  
+  ::view-transition-old(root) {
+    animation: move-out 0.5s ease-in forwards;
+  }
+  
+  ::view-transition-new(root) {
+    animation: move-in 0.5s ease-out forwards;
+  }
+  
