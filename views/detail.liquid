@@ -39,11 +39,43 @@ ChatGPT: Voor het bevestigen van mijn begrip van de bronnen
 
       <!-- Afbeelding van het artwork -->
       <article class="object-detail">
-        <img
-          class="detail-artwork-image"
-          src="https://fdnd-agency.directus.app/assets/{{ artwork.image }}"
-          alt="Afbeelding van het artwork: {{ artwork.title }}">
+        <picture>
+          <!-- AVIF (meerdere resoluties) -->
+          <source
+            type="image/avif"
+            srcset="
+              https://fdnd-agency.directus.app/assets/{{ artwork.image.id }}?format=avif&width=480 480w,
+              https://fdnd-agency.directus.app/assets/{{ artwork.image.id }}?format=avif&width=768 768w,
+              https://fdnd-agency.directus.app/assets/{{ artwork.image.id }}?format=avif&width=1024 1024w,
+              https://fdnd-agency.directus.app/assets/{{ artwork.image.id }}?format=avif&width=1440 1440w
+            "
+            sizes="(max-width: 768px) 100vw, 720px"
+          >
+      
+          <!-- WebP fallback -->
+          <source
+            type="image/webp"
+            srcset="
+              https://fdnd-agency.directus.app/assets/{{ artwork.image.id }}?format=webp&width=480 480w,
+              https://fdnd-agency.directus.app/assets/{{ artwork.image.id }}?format=webp&width=768 768w,
+              https://fdnd-agency.directus.app/assets/{{ artwork.image.id }}?format=webp&width=1024 1024w,
+              https://fdnd-agency.directus.app/assets/{{ artwork.image.id }}?format=webp&width=1440 1440w
+            "
+            sizes="(max-width: 768px) 100vw, 720px"
+          >
+      
+          <!-- PNG fallback -->
+          <img
+            class="detail-artwork-image"
+            src="https://fdnd-agency.directus.app/assets/{{ artwork.image.id }}?format=png&width=1024"
+            alt="Afbeelding van het artwork: {{ artwork.title }}"
+            loading="lazy"
+            width="{{ artwork.image.width }}"
+            height="{{ artwork.image.height }}"
+          >
+        </picture>
       </article>
+      
 
       <!-- Info-sectie met beschrijving -->
       <div class="info-container">
@@ -65,7 +97,7 @@ ChatGPT: Voor het bevestigen van mijn begrip van de bronnen
         </p>
         
 
-        <!-- beschrijving zoals titel en slug -->
+        <!-- beschrijving zoals titel -->
         <aside class="info-right">
           <section class="artwork-details">
             <h2 id="artwork-metadata" class="visually-hidden">Details over het werk</h2>
@@ -98,7 +130,7 @@ ChatGPT: Voor het bevestigen van mijn begrip van de bronnen
         <!-- PNG fallback -->
         <img
           src="/assets/error.png"
-          alt="Mona Lisa chewing gum – page not found"
+          alt="Mona Lisa chewing gum page not found"
           width="600"
           height="400"
           loading="lazy">
@@ -107,6 +139,10 @@ ChatGPT: Voor het bevestigen van mijn begrip van de bronnen
   </section>
 </main>
 {% endif %}
+
+
+
+
 
 
 

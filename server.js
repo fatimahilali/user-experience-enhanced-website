@@ -26,7 +26,7 @@ app.set('views', './views')
 // Route-handler voor de hoofdpagina ('/')
 app.get('/', async function (request, response) {
     // Haal de data op van de Directus API
-    const apiResponse = await fetch('https://fdnd-agency.directus.app/items/fabrique_art_objects');
+    const apiResponse = await fetch('https://fdnd-agency.directus.app/items/fabrique_art_objects?fields=*,image.id,image.width,image.height');
     const apiResponseJSON = await apiResponse.json();
   
     // Render de Liquid-template en geef de data mee
@@ -52,8 +52,8 @@ app.get('/detail/:id', async (req, res) => {
   const summaryField = lang === 'ar' ? 'summaryAR' : 'summary';
 
   // Stel de velden samen die je nodig hebt uit de API
-  const fields = `${titleField},${summaryField},image,slug`;
-
+  const fields = `${titleField},${summaryField},image.id,image.width,image.height,slug`;
+    
   try {
     // Vraag de data van het kunstwerk op via de Directus API
     const response = await fetch(

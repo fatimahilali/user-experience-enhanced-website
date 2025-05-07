@@ -40,8 +40,10 @@
 
 <!-- Kunstgalerij -->
 <section class="art-gallery">
+  
   <ul>
     {% for artwork in artworks %}
+
       <li class="art-item">
         <figure class="art-figure">
           <a href="/detail/{{ artwork.id }}" >
@@ -50,10 +52,10 @@
             <source
               type="image/avif"
               srcset="
-                https://fdnd-agency.directus.app/assets/{{ artwork.image }}?format=avif&width=250 250w,
-                https://fdnd-agency.directus.app/assets/{{ artwork.image }}?format=avif&width=350 350w,
-                https://fdnd-agency.directus.app/assets/{{ artwork.image }}?format=avif&width=450 450w,
-                https://fdnd-agency.directus.app/assets/{{ artwork.image }}?format=avif&width=720 720w
+                https://fdnd-agency.directus.app/assets/{{ artwork.image.id }}?format=avif&width=250 250w,
+                https://fdnd-agency.directus.app/assets/{{ artwork.image.id }}?format=avif&width=350 350w,
+                https://fdnd-agency.directus.app/assets/{{ artwork.image.id }}?format=avif&width=450 450w,
+                https://fdnd-agency.directus.app/assets/{{ artwork.image.id }}?format=avif&width=720 720w
               "
               sizes="
                   (max-width: 400px) 100vw,
@@ -67,10 +69,10 @@
             <source
               type="image/webp"
               srcset="
-                https://fdnd-agency.directus.app/assets/{{ artwork.image }}?format=webp&width=250 250w,
-                https://fdnd-agency.directus.app/assets/{{ artwork.image }}?format=webp&width=350 350w,
-                https://fdnd-agency.directus.app/assets/{{ artwork.image }}?format=webp&width=450 450w,
-                https://fdnd-agency.directus.app/assets/{{ artwork.image }}?format=webp&width=720 720w
+                https://fdnd-agency.directus.app/assets/{{ artwork.image.id }}?format=webp&width=250 250w,
+                https://fdnd-agency.directus.app/assets/{{ artwork.image.id}}?format=webp&width=350 350w,
+                https://fdnd-agency.directus.app/assets/{{ artwork.image.id }}?format=webp&width=450 450w,
+                https://fdnd-agency.directus.app/assets/{{ artwork.image.id}}?format=webp&width=720 720w
               "
               sizes="
               (max-width: 400px) 100vw,
@@ -79,9 +81,9 @@
               300px
             "            >
 
-            <!-- Standaard fallback (bijv. PNG of origineel) -->
+            <!-- Standaard fallback (PNG  origineel) -->
             <img
-            src="https://fdnd-agency.directus.app/assets/{{ artwork.image.id }}?format=png&width=720"
+            src="https://fdnd-agency.directus.app/assets/{{ artwork.image.id}}?format=png&width=720"
             alt="Afbeelding van {{ artwork.title }}"
               width="{{ artwork.image.width }}"
               height="{{ artwork.image.height }}"
@@ -93,5 +95,10 @@
     {% endfor %}
   </ul>
 </section>
+
+
+
+
+
 
 
